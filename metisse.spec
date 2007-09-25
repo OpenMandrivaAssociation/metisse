@@ -10,7 +10,7 @@
 %define metisse_version 0.4.0
 %define metisse_cvs rc4
 %define fvwm_cvs rc4
-%define rel 7
+%define rel 8
 %define release %mkrel 1.%{metisse_cvs}.%{rel}
 %define distname %{name}-%{metisse_version}-%{metisse_cvs}
 %define fvwm_name fvwm-insitu-%{fvwm_cvs}
@@ -59,6 +59,8 @@ Patch9: metisse-0.4.0-rc4-restart.patch
 Patch10: metisse-0.4.0-rc4-addcolors.patch
 # (fc) 0.4.0-1.rc4.7mdv rename locale file 
 Patch11: metisse-0.4.0-rc4-textdomain.patch
+# (fc) 0.4.0-1.rc4.8mdv fix build with gcc 4.2
+Patch12: metisse-0.4.0-rc4-fixgcc42.patch
 
 License: MIT
 Group: System/Libraries
@@ -150,11 +152,10 @@ A modified version of the FVWM window manager to be used with metisse
 %patch9 -p1 -b .restart
 %patch10 -p1 -b .addcolors
 %patch11 -p1 -b .textdomain
+%patch12 -p1 -b .fixgcc42
 
 #needed by patches5 and 10
-aclocal-1.9
-automake-1.9
-autoconf
+autoreconf
 
 %build
 %configure2_5x  --enable-mmx --with-gtk-prefix=/ --with-imlib-prefix=/ \
