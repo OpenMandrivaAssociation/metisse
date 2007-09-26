@@ -127,7 +127,7 @@ developing programs using the %{name} library.
 
 %package fvwm
 Summary: A modified version of the FVWM window manager to be used with metisse
-Group: System
+Group: Graphical desktop/FVWM based
 Version: %{fvwm_version}
 Obsoletes: metisse-fvwm-fvwm-i18n-ar
 Obsoletes: metisse-fvwm-fvwm-i18n-de
