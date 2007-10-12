@@ -10,7 +10,7 @@
 %define metisse_version 0.4.0
 %define metisse_cvs rc4
 %define fvwm_cvs rc4
-%define rel 8
+%define rel 9
 %define release %mkrel 1.%{metisse_cvs}.%{rel}
 %define distname %{name}-%{metisse_version}-%{metisse_cvs}
 %define fvwm_name fvwm-insitu-%{fvwm_cvs}
@@ -61,6 +61,8 @@ Patch10: metisse-0.4.0-rc4-addcolors.patch
 Patch11: metisse-0.4.0-rc4-textdomain.patch
 # (fc) 0.4.0-1.rc4.8mdv fix build with gcc 4.2
 Patch12: metisse-0.4.0-rc4-fixgcc42.patch
+# (fc) 0.4.0-1.rc4.9mdv don't bind Alt-F1/F2 when running under GNOME/KDE (Mdv bug #29444)
+Patch13: metisse-0.4.0-rc4-keybindings.patch
 
 License: MIT
 Group: System/Libraries
@@ -153,6 +155,7 @@ A modified version of the FVWM window manager to be used with metisse
 %patch10 -p1 -b .addcolors
 %patch11 -p1 -b .textdomain
 %patch12 -p1 -b .fixgcc42
+%patch13 -p1 -b .keybindings
 
 #needed by patches5 and 10
 autoreconf
