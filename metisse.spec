@@ -67,6 +67,7 @@ Patch13: metisse-0.4.0-rc4-keybindings.patch
 License: MIT
 Group: System/Libraries
 Url: http://insitu.lri.fr/metisse/ 
+BuildRoot: %{_tmppath}/%{name}-%{metisse_version}-%{release}-buildroot
 BuildRequires: automake
 BuildRequires: mesaglu-devel jpeg-devel libexif-devel freetype2-devel
 BuildRequires: nucleo-devel at-spi-devel libxt-devel 
