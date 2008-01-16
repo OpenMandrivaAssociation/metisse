@@ -10,7 +10,7 @@
 %define metisse_version 0.4.0
 %define metisse_cvs rc4
 %define fvwm_cvs rc4
-%define rel 9
+%define rel 10
 %define release %mkrel 1.%{metisse_cvs}.%{rel}
 %define distname %{name}-%{metisse_version}-%{metisse_cvs}
 %define fvwm_name fvwm-insitu-%{fvwm_cvs}
@@ -131,11 +131,11 @@ developing programs using the %{name} library.
 Summary: A modified version of the FVWM window manager to be used with metisse
 Group: Graphical desktop/FVWM based
 Version: %{fvwm_version}
-Obsoletes: metisse-fvwm-fvwm-i18n-ar
-Obsoletes: metisse-fvwm-fvwm-i18n-de
-Obsoletes: metisse-fvwm-fvwm-i18n-de
-Obsoletes: metisse-fvwm-fvwm-i18n-sv_SE
-Obsoletes: metisse-fvwm-fvwm-i18n-zh_CN
+Obsoletes: metisse-fvwm-i18n-ar
+Obsoletes: metisse-fvwm-i18n-de
+Obsoletes: metisse-fvwm-i18n-de
+Obsoletes: metisse-fvwm-i18n-sv_SE
+Obsoletes: metisse-fvwm-i18n-zh_CN
 
 %description fvwm
 A modified version of the FVWM window manager to be used with metisse
