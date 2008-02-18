@@ -25,7 +25,7 @@
 #workaround buggy perl.req
 %define _requires_exceptions perl(Gtk)
 
-Summary: Metisse is an X-based window system 
+Summary: X-based window system 
 Name: %{name}
 Version: %{metisse_version}
 Release: %{release}
@@ -106,7 +106,7 @@ OpenGL (via nucleo) for rendering the X desktop into a window of a "regular"
 %{common_description}
 
 %package -n	%{lib_name}
-Summary:	A library for metisse
+Summary:	Library for metisse
 Group:		System/Libraries
 
 %description -n	%{lib_name}
@@ -128,7 +128,7 @@ This package contains the header files and libraries needed for
 developing programs using the %{name} library.
 
 %package fvwm
-Summary: A modified version of the FVWM window manager to be used with metisse
+Summary: Modified version of the FVWM window manager to be used with metisse
 Group: Graphical desktop/FVWM based
 Version: %{fvwm_version}
 Obsoletes: metisse-fvwm-i18n-ar
