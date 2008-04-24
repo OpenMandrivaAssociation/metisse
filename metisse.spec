@@ -65,7 +65,7 @@ Patch12: metisse-0.4.0-rc4-fixgcc42.patch
 Patch13: metisse-0.4.0-rc4-keybindings.patch
 
 License: MIT
-Group: System/Libraries
+Group: Graphical desktop/Other
 Url: http://insitu.lri.fr/metisse/ 
 BuildRoot: %{_tmppath}/%{name}-%{metisse_version}-%{release}-buildroot
 BuildRequires: automake
