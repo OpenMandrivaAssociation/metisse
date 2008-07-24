@@ -10,7 +10,7 @@
 %define metisse_version 0.4.0
 %define metisse_cvs rc4
 %define fvwm_cvs rc4
-%define rel 10
+%define rel 11
 %define release %mkrel 1.%{metisse_cvs}.%{rel}
 %define distname %{name}-%{metisse_version}-%{metisse_cvs}
 %define fvwm_name fvwm-insitu-%{fvwm_cvs}
