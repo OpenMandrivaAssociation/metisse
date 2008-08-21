@@ -19,6 +19,7 @@
 %define lib_major 1
 
 %define lib_name %mklibname %{name} %{lib_major}
+%define develname %mklibname %{name} -d
 
 %define common_description Metisse is an experimental X desktop with some OpenGL capacity.  It consists of a virtual X server called Xmetisse, a special version of FVWM, and a FVWM module FvwmCompositor.
 
@@ -63,6 +64,15 @@ Patch11: metisse-0.4.0-rc4-textdomain.patch
 Patch12: metisse-0.4.0-rc4-fixgcc42.patch
 # (fc) 0.4.0-1.rc4.9mdv don't bind Alt-F1/F2 when running under GNOME/KDE (Mdv bug #29444)
 Patch13: metisse-0.4.0-rc4-keybindings.patch
+# (aw) from upstream CVS: fix build with gcc 4.3
+Patch14: metisse-0.4.0-rc4-gcc43.patch
+
+# Security fixes from stock x11-server - AdamW 2008/08
+Patch100: x11-server-1.1.1-rh-CVE-2008-1379.patch
+Patch101: x11-server-1.1.1-rh-CVE-2008-2360.patch
+Patch102: x11-server-1.1.1-rh-CVE-2008-2361.patch
+# Had to add a bit to this one to make it build - AdamW 2008/08
+Patch103: metisse-x11-server-1.1.1-rh-CVE-2008-2362.patch
 
 License: MIT
 Group: Graphical desktop/Other
@@ -115,13 +125,14 @@ Group:		System/Libraries
 This package contains the library needed to run programs dynamically
 linked with %{name}.
 
-%package -n	%{lib_name}-devel
+%package -n	%{develname}
 Summary:	Development tools for programs using %{name}
 Group:		Development/C
 Requires:	%{lib_name} = %{metisse_version}
 Provides:	%{name}-devel = %{metisse_version}-%{release}
+Obsoletes:	%{mklibname metisse 1 -d}
 
-%description -n	%{lib_name}-devel
+%description -n	%{develname}
 %{common_description}
 
 This package contains the header files and libraries needed for
@@ -156,6 +167,14 @@ A modified version of the FVWM window manager to be used with metisse
 %patch11 -p1 -b .textdomain
 %patch12 -p1 -b .fixgcc42
 %patch13 -p1 -b .keybindings
+%patch14 -p1 -b .gcc43
+
+pushd xserver
+%patch100 -p1
+%patch101 -p1
+%patch102 -p1
+%patch103 -p1
+popd
 
 #needed by patches5 and 10
 autoreconf
@@ -172,7 +191,7 @@ autoreconf
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 %makeinstall
 install -d %{buildroot}%{_datadir}/compositing-server %{buildroot}%{_datadir}/compositing-wm %{buildroot}%{_sysconfdir}/X11/xinit.d/
 install -m644 %{SOURCE2} -t %{buildroot}%{_datadir}/compositing-server/
@@ -180,9 +199,9 @@ install -m644 %{SOURCE3} -t %{buildroot}%{_datadir}/compositing-wm/
 install -m755 %{SOURCE4} -t %{buildroot}%{_sysconfdir}/X11/xinit.d/
 
 #remove unpackaged files
-rm -f $RPM_BUILD_ROOT%{_mandir}/man1/FvwmGtkDebug $RPM_BUILD_ROOT%{_libdir}/fvwm-insitu/2.5.20/FvwmGtkDebug
+rm -f %{buildroot}%{_mandir}/man1/FvwmGtkDebug %{buildroot}%{_libdir}/fvwm-insitu/2.5.20/FvwmGtkDebug
 
-for i in `find $RPM_BUILD_ROOT%{_datadir}/locale -name '*.mo'` ; do
+for i in `find %{buildroot}%{_datadir}/locale -name '*.mo'` ; do
  mv $i "`dirname $i`/`basename $i .mo`-insitu.mo"
 done
 
@@ -194,7 +213,7 @@ cat FvwmScript-insitu.lang >> fvwm-insitu.lang
 cat FvwmTaskBar-insitu.lang >> fvwm-insitu.lang
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %if %mdkversion < 200900
 %post -n %{lib_name} -p /sbin/ldconfig
@@ -228,7 +247,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %{_libdir}/*.so.%{lib_major}*
 
-%files -n %{lib_name}-devel
+%files -n %{develname}
 %defattr(-,root,root)
 %{_libdir}/*.so
 %{_libdir}/*.la
