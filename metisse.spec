@@ -10,7 +10,7 @@
 %define metisse_version 0.4.0
 %define metisse_cvs rc4
 %define fvwm_cvs rc4
-%define rel 12
+%define rel 13
 %define release %mkrel 1.%{metisse_cvs}.%{rel}
 %define distname %{name}-%{metisse_version}-%{metisse_cvs}
 %define fvwm_name fvwm-insitu-%{fvwm_cvs}
@@ -68,6 +68,8 @@ Patch13: metisse-0.4.0-rc4-keybindings.patch
 Patch14: metisse-0.4.0-rc4-gcc43.patch
 # (fc) fix crash on unconfigured network address (from xorg git) (Mdv bug #41240)
 Patch15: metisse-0.4.0-rc4-fixcrash.patch
+# (fc) handle dock correctly (CVS)
+Patch16: metisse-0.4.0-rc4-handle-dock.patch
 
 # Security fixes from stock x11-server - AdamW 2008/08
 Patch100: x11-server-1.1.1-rh-CVE-2008-1379.patch
@@ -170,6 +172,7 @@ A modified version of the FVWM window manager to be used with metisse
 %patch12 -p1 -b .fixgcc42
 %patch13 -p1 -b .keybindings
 %patch14 -p1 -b .gcc43
+%patch16 -p1 -b .handledock
 
 pushd xserver
 %patch15 -p1 -b .fixcrash
