@@ -10,10 +10,10 @@
 %define metisse_version 0.4.0
 %define metisse_cvs rc4
 %define fvwm_cvs rc4
-%define rel 13
-%define release %mkrel 1.%{metisse_cvs}.%{rel}
-%define distname %{name}-%{metisse_version}-%{metisse_cvs}
-%define fvwm_name fvwm-insitu-%{fvwm_cvs}
+%define rel 2
+%define release %mkrel %{rel}
+%define distname %{name}-%{metisse_version}
+%define fvwm_name fvwm-insitu
 %define fvwm_version 2.5.20
 
 %define lib_major 1
@@ -44,32 +44,10 @@ Patch1: metisse-20061130-background.patch
 Patch2: metisse-20061201-a11y.patch
 # (fc) 0.4.0-20061208.1mdv change defaults (Ia Ora theme, only pager, 1 workspace)
 Patch3: metisse-defaults.patch
-# (gb) 64-bit + other smaller fixes
-Patch4: metisse-20070112-64bit-fixes.patch
-# (fc) 0.4.0-1.rc4.1mdv fix build with glx enabled
-Patch5: metisse-0.4.0-rc4-fixglx.patch
-# (fc) 0.4.0-1.rc4.1mdv fix kde tray icon support
-Patch6: fvwm-insitu-20070117-fixkdetray.patch
-# (fc) 0.4.0-1.rc4.2mdv fix pager mode border color (CVS)
-Patch7: metisse-0.4.0-rc4-fixpagerborder.patch
-# (fc) 0.4.0-1.rc4.3mdv fix utf8 encoding for titlebar font (Mdv bug #29019) (CVS)
-Patch8: metisse-0.4.0-rc4-fixutf8title.patch
-# (fc) 0.4.0-1.rc4.5mdv kill Xmetisse when exiting from a session, hide restart when running in a session manager (CVS)
-Patch9: metisse-0.4.0-rc4-restart.patch
-# (fc) 0.4.0-1.rc4.6mdv add gray and free color theme
-Patch10: metisse-0.4.0-rc4-addcolors.patch
 # (fc) 0.4.0-1.rc4.7mdv rename locale file 
 Patch11: metisse-0.4.0-rc4-textdomain.patch
-# (fc) 0.4.0-1.rc4.8mdv fix build with gcc 4.2
-Patch12: metisse-0.4.0-rc4-fixgcc42.patch
-# (fc) 0.4.0-1.rc4.9mdv don't bind Alt-F1/F2 when running under GNOME/KDE (Mdv bug #29444)
-Patch13: metisse-0.4.0-rc4-keybindings.patch
-# (aw) from upstream CVS: fix build with gcc 4.3
-Patch14: metisse-0.4.0-rc4-gcc43.patch
-# (fc) fix crash on unconfigured network address (from xorg git) (Mdv bug #41240)
-Patch15: metisse-0.4.0-rc4-fixcrash.patch
-# (fc) handle dock correctly (CVS)
-Patch16: metisse-0.4.0-rc4-handle-dock.patch
+# (fc) 0.4.0-1mdv fix build when fortify is enabled
+Patch12: metisse-0.4.0-fixfortify.patch
 
 # Security fixes from stock x11-server - AdamW 2008/08
 Patch100: x11-server-1.1.1-rh-CVE-2008-1379.patch
@@ -161,21 +139,10 @@ A modified version of the FVWM window manager to be used with metisse
 %patch1 -p1 -b .blueblackground
 %patch2 -p1 -b .a11y
 %patch3 -p1 -b .defaults
-%patch4 -p1 -b .64bit-fixes
-%patch5 -p1 -b .fixglx
-%patch6 -p1 -b .fixkdetray
-%patch7 -p1 -b .fixpagerborder
-%patch8 -p1 -b .fixutf8title
-%patch9 -p1 -b .restart
-%patch10 -p1 -b .addcolors
 %patch11 -p1 -b .textdomain
-%patch12 -p1 -b .fixgcc42
-%patch13 -p1 -b .keybindings
-%patch14 -p1 -b .gcc43
-%patch16 -p1 -b .handledock
+%patch12 -p1 -b .fixfortify
 
 pushd xserver
-%patch15 -p1 -b .fixcrash
 %patch100 -p1
 %patch101 -p1
 %patch102 -p1
@@ -183,7 +150,11 @@ pushd xserver
 popd
 
 #needed by patches5 and 10
+libtoolize --copy --force
 autoreconf
+pushd fvwm-insitu
+autoreconf
+popd
 
 %build
 %configure2_5x  --enable-mmx --with-gtk-prefix=/ --with-imlib-prefix=/ \
@@ -198,7 +169,7 @@ autoreconf
 
 %install
 rm -rf %{buildroot}
-%makeinstall
+%makeinstall_std
 install -d %{buildroot}%{_datadir}/compositing-server %{buildroot}%{_datadir}/compositing-wm %{buildroot}%{_sysconfdir}/X11/xinit.d/
 install -m644 %{SOURCE2} -t %{buildroot}%{_datadir}/compositing-server/
 install -m644 %{SOURCE3} -t %{buildroot}%{_datadir}/compositing-wm/
@@ -235,7 +206,6 @@ rm -rf %{buildroot}
 %{_bindir}/metisse-combo2radio
 %{_bindir}/metisse-combo2radio-edit
 %{_bindir}/metisse-demo-address-app
-%{_bindir}/metisse-dummy-win
 %{_bindir}/metisse-start-fvwm
 %{_bindir}/metisse-xlib
 %{_sysconfdir}/X11/xinit.d/29metisse
