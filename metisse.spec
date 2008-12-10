@@ -7,10 +7,10 @@
 # tar cvjf metisse-$DATE.tar.bz2 metisse-$DATE
 
 %define name metisse
-%define metisse_version 0.4.0
+%define metisse_version 0.4.1
 %define metisse_cvs rc4
 %define fvwm_cvs rc4
-%define rel 2
+%define rel 1
 %define release %mkrel %{rel}
 %define distname %{name}-%{metisse_version}
 %define fvwm_name fvwm-insitu
@@ -46,15 +46,6 @@ Patch2: metisse-20061201-a11y.patch
 Patch3: metisse-defaults.patch
 # (fc) 0.4.0-1.rc4.7mdv rename locale file 
 Patch11: metisse-0.4.0-rc4-textdomain.patch
-# (fc) 0.4.0-1mdv fix build when fortify is enabled
-Patch12: metisse-0.4.0-fixfortify.patch
-
-# Security fixes from stock x11-server - AdamW 2008/08
-Patch100: x11-server-1.1.1-rh-CVE-2008-1379.patch
-Patch101: x11-server-1.1.1-rh-CVE-2008-2360.patch
-Patch102: x11-server-1.1.1-rh-CVE-2008-2361.patch
-# Had to add a bit to this one to make it build - AdamW 2008/08
-Patch103: metisse-x11-server-1.1.1-rh-CVE-2008-2362.patch
 
 License: MIT
 Group: Graphical desktop/Other
@@ -135,26 +126,17 @@ A modified version of the FVWM window manager to be used with metisse
 
 %prep
 %setup -q -n %{distname} 
-#%patch0 -p1 -b .fixcursor
 %patch1 -p1 -b .blueblackground
 %patch2 -p1 -b .a11y
 %patch3 -p1 -b .defaults
 %patch11 -p1 -b .textdomain
-%patch12 -p1 -b .fixfortify
-
-pushd xserver
-%patch100 -p1
-%patch101 -p1
-%patch102 -p1
-%patch103 -p1
-popd
 
 #needed by patches5 and 10
-libtoolize --copy --force
-autoreconf
-pushd fvwm-insitu
-autoreconf
-popd
+#libtoolize --copy --force
+#autoreconf
+#pushd fvwm-insitu
+#autoreconf
+#popd
 
 %build
 %configure2_5x  --enable-mmx --with-gtk-prefix=/ --with-imlib-prefix=/ \
