@@ -131,13 +131,6 @@ A modified version of the FVWM window manager to be used with metisse
 %patch3 -p1 -b .defaults
 %patch11 -p1 -b .textdomain
 
-#needed by patches5 and 10
-#libtoolize --copy --force
-#autoreconf
-#pushd fvwm-insitu
-#autoreconf
-#popd
-
 %build
 %configure2_5x  --enable-mmx --with-gtk-prefix=/ --with-imlib-prefix=/ \
  --without-rplay-library --enable-bidi --enable-xinerama \
