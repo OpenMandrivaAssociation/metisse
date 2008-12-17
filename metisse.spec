@@ -14,7 +14,6 @@
 %define release %mkrel %{rel}
 %define distname %{name}-%{metisse_version}
 %define fvwm_name fvwm-insitu
-%define fvwm_version 2.5.20
 
 %define lib_major 1
 
@@ -117,7 +116,7 @@ developing programs using the %{name} library.
 %package fvwm
 Summary: Modified version of the FVWM window manager to be used with metisse
 Group: Graphical desktop/FVWM based
-Version: %{fvwm_version}
+Epoch: 1
 Obsoletes: metisse-fvwm-i18n-ar
 Obsoletes: metisse-fvwm-i18n-de
 Obsoletes: metisse-fvwm-i18n-de
@@ -229,8 +228,8 @@ rm -rf %{buildroot}
 %{_bindir}/fvwmi
 %{_bindir}/fvwmi-config
 %{_bindir}/opale-start-fvwmi
-%dir %{_libdir}/fvwm-insitu/%{fvwm_version}
-%{_libdir}/fvwm-insitu/%{fvwm_version}/*
+%dir %{_libdir}/fvwm-insitu/*
+%{_libdir}/fvwm-insitu/*/*
 %{py_sitedir}/facade_setup.py*
 %dir %{_datadir}/fvwm-insitu
 %{_datadir}/fvwm-insitu/*
