@@ -46,6 +46,8 @@ Patch2: metisse-20061201-a11y.patch
 Patch3: metisse-defaults.patch
 # (fc) 0.4.0-1.rc4.7mdv rename locale file 
 Patch11: metisse-0.4.0-rc4-textdomain.patch
+# (fc) 0.4.1-1mdv fix format security errors
+Patch12: metisse-0.4.1-format-security.patch
 
 License: MIT
 Group: Graphical desktop/Other
@@ -131,6 +133,7 @@ A modified version of the FVWM window manager to be used with metisse
 %patch2 -p1 -b .a11y
 %patch3 -p1 -b .defaults
 %patch11 -p1 -b .textdomain
+%patch12 -p1 -b .format-security
 
 %build
 %configure2_5x  --enable-mmx --with-gtk-prefix=/ --with-imlib-prefix=/ \
