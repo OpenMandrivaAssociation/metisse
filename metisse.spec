@@ -60,6 +60,7 @@ BuildRequires: libxpm-devel libpng-devel fribidi-devel
 BuildRequires: fribidi-devel
 BuildRequires: libGConf2-devel libglade2-devel
 BuildRequires: mDNSResponder-devel
+BuildRequires: popt-devel
 # not enabled gnome-libs-devel librplay-devel
 BuildRequires: python
 Requires: x11-server-xmetisse
