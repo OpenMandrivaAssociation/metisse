@@ -1,0 +1,40 @@
+--- metisse-0.4.0-rc4/fvwm-insitu/fvwm/fvwm.c.textdomain	2007-03-22 14:36:52.000000000 +0100
++++ metisse-0.4.0-rc4/fvwm-insitu/fvwm/fvwm.c	2007-03-22 14:37:33.000000000 +0100
+@@ -1728,7 +1728,7 @@
+ 	g_argv[g_argc] = NULL;
+ 
+ 	FlocaleInit(LC_CTYPE, "", "", "FVWM");
+-	FGettextInit("fvwm", LOCALEDIR, "FVWM");
++	FGettextInit("fvwm-insitu", LOCALEDIR, "FVWM");
+ 
+ 	setVersionInfo();
+ 	/* Put the default module directory into the environment so it can be
+--- metisse-0.4.0-rc4/fvwm-insitu/modules/FvwmScript/script.y.textdomain	2007-03-22 14:39:53.000000000 +0100
++++ metisse-0.4.0-rc4/fvwm-insitu/modules/FvwmScript/script.y	2007-03-22 14:40:16.000000000 +0100
+@@ -385,13 +385,13 @@
+ head:
+ | head USEGETTEXT GSTR
+ {
+-	FGettextInit("FvwmScript", LOCALEDIR, "FvwmScript");
++	FGettextInit("FvwmScript-insitu", LOCALEDIR, "FvwmScript");
+ 	FGettextSetLocalePath($3);
+ }
+ | head USEGETTEXT
+ {
+ 	fprintf(stderr,"UseGettext!\n");
+-	FGettextInit("FvwmScript", LOCALEDIR, "FvwmScript");
++	FGettextInit("FvwmScript-insitu", LOCALEDIR, "FvwmScript");
+ }
+ /* vide: dans ce cas on utilise les valeurs par défaut */
+ | head WINDOWTITLE GSTR
+--- metisse-0.4.0-rc4/fvwm-insitu/modules/FvwmTaskBar/FvwmTaskBar.c.textdomain	2007-03-22 14:37:58.000000000 +0100
++++ metisse-0.4.0-rc4/fvwm-insitu/modules/FvwmTaskBar/FvwmTaskBar.c	2007-03-22 14:38:14.000000000 +0100
+@@ -263,7 +263,7 @@
+ 
+   FlocaleInit(LC_CTYPE, "", "", "FvwmTaskBar");
+   setlocale(LC_TIME, "");
+-  FGettextInit("FvwmTaskBar", LOCALEDIR, "FvwmTaskBar");
++  FGettextInit("FvwmTaskBar-insitu", LOCALEDIR, "FvwmTaskBar");
+ 
+   for (i = 3; i < NUMBER_OF_EXTENDED_MOUSE_BUTTONS; i++)
+   {
