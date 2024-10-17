@@ -50,7 +50,7 @@ Patch12: metisse-0.4.1-format-security.patch
 
 License: MIT
 Group: Graphical desktop/Other
-Url: http://insitu.lri.fr/metisse/ 
+Url: https://insitu.lri.fr/metisse/ 
 BuildRoot: %{_tmppath}/%{name}-%{metisse_version}-%{release}-buildroot
 BuildRequires: automake
 BuildRequires: mesaglu-devel jpeg-devel libexif-devel freetype2-devel
