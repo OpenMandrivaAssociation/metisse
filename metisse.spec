@@ -52,6 +52,9 @@ License: MIT
 Group: Graphical desktop/Other
 Url: https://insitu.lri.fr/metisse/ 
 BuildRoot: %{_tmppath}/%{name}-%{metisse_version}-%{release}-buildroot
+BuildRequires:	autoconf
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
 BuildRequires: automake
 BuildRequires: mesaglu-devel jpeg-devel libexif-devel freetype2-devel
 BuildRequires: nucleo-devel at-spi-devel libxt-devel 
